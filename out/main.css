@@ -1,0 +1,231 @@
+* {
+    transition: border 0.3s, background 0.3s, opactiy 0.3s;
+    font-size: medium;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scrollbar-color: rgb(155, 155, 155) rgb(238, 238, 238);
+    scrollbar-width: thin;
+}
+div {
+    user-select: none;
+    margin: 3px;
+    display: flex;
+}
+body {
+    background-color: white;
+}
+button {
+    margin: 1px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    background-color: rgb(233, 233, 233);
+}
+button:hover {
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    background-color: rgb(206, 206, 206);
+}
+input {
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+input:hover {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px grey;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(155, 155, 155);
+    border-radius: 10px;
+}
+
+.block {
+    max-width: 700px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.column {
+    flex-direction: column;
+}
+.input_value {
+    padding: 5px;
+    padding-left: 0;
+    align-items: center;
+    border-radius: 10px;
+}
+.wrong {
+    background-color: red !important;
+}
+.del_value {
+    margin: 0;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    width: 40px;
+}
+.del_value:hover {
+    margin: 0;
+    margin-left: 10px;
+    padding: 5px;
+}
+#input_table {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+.red_btn {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background-color: rgb(228, 176, 176);
+}
+.red_btn:hover {
+    background-color: rgb(185, 138, 138);
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+.green_btn {
+    background-color: rgb(209, 230, 219);
+}
+.green_btn:hover {
+    background-color: rgb(184, 202, 191);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+#input_next, #add_value_button {
+    max-width: 100px;
+}
+#minimizing_table {
+    max-width: 500px;
+    max-height: 500px;
+}
+#minimizing_variants {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+.overline {
+    text-decoration: overline;
+}
+.variant {
+    min-width: 200px;
+    background-color: rgb(212, 212, 216);
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid transparent;
+}
+.variant:hover {
+    border: 2px solid black;
+}
+.selected_variant {
+    background-color: rgb(173, 168, 202);
+}
+#minimizing_next, #minimizing_back {
+    min-width: 100px;
+}
+
+#comparators {
+    margin: 0;
+    padding: 15px;
+    padding-left: 0;
+
+    max-height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.selection_comparator {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+.comparator_changed {
+    background-color: antiquewhite;
+    border: 2px solid wheat;
+}
+.comparator_error {
+    background-color: rgb(252, 181, 181);
+    border: 2px solid rgb(255, 157, 157);
+}
+.selection_delimiter {
+    flex-basis: 100%;
+}
+.selection_input {
+    width: auto;
+    min-height: 2rem;
+}
+.complexity {
+    margin: 0;
+    padding: 5px;
+    height : 2rem;
+    width  : max-content;
+    min-width: 9rem;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background-color: aliceblue;
+}
+.complexity:hover {
+    border: 2px solid black;
+}
+.selected_item {
+    background-color: rgb(173, 168, 202);
+}
+.selection_strike {
+    margin: 0;
+    margin-top: 3px;
+    background-color: rgb(173, 168, 202);
+    height: 3px;
+}
+#k_values {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+.k_value {
+    padding: 5px;
+    border-radius: 5px;
+}
+.editing_value_input {
+    min-width: 400px;
+}
+.editing_input {
+    display: block;
+    user-select: text;
+    background-color: #f5f7fc;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.editing_input:hover {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+.editing_input:focus {
+    border: 2px solid rgba(0, 0, 0, 0.8);
+}
+.changed {
+    background-color: #dbdae7;
+}
+#k_values {
+    line-height: 140%;
+    user-select: text;
+    column-count: 3;
+}
+#y_values {
+    line-height: 140%;
+    user-select: text;
+    column-count: 2;
+}
+mark {
+    border-radius: 5px;
+}

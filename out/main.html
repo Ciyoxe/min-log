@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<link rel="stylesheet" href="main.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Min log</title>
+</head>
+<body>
+    <div id="input" class="column" style="display: none;">
+        <div class="block column">
+            <div style="align-items: center;">
+                <div style="min-width: 200px;">Количество входов: </div> (1..6) &nbsp; <input id="x_count_input" type="number" value="2">
+            </div>
+            <div style="align-items: center;">
+                <div style="min-width: 200px;">Количество выходов:</div> (1..8) &nbsp; <input id="y_count_input" type="number" value="2">
+            </div>
+        </div>
+        <div class="block column">
+            <div style="align-items: center;">
+                <button id="add_value_button" style="margin-right: 20px;">Добавить</button>
+                <input id="is_hex_input" type="checkbox" id="hex" checked="true" title="Использовать ли шестнадцатиричную систему счисления (иначе двоичную)">
+                <label for="hex">16 c/c</label>
+            </div>
+            <div style="height: 10px;"></div>
+            <div id="input_table" class="column"></div>
+            <p style="color: gray">Лайфхак: Используйте Tab для быстрого переключения между полями ввода.</p>
+        </div>
+        <button id="input_next" class="green_btn">Далее</button>
+    </div>
+
+    <div id="minimizing" class="column" style="display: none;">
+        <div id="minimizing_text"></div>
+        <div class="block" style="width: 900px; min-width: 900px;">
+            <canvas id="minimizing_table" width="500" height="500"></canvas>
+            <div id="minimizing_variants" class="column"></div>
+            <div class="column">
+                <button id="apply_variant">Применить</button>
+                <button id="erase_variants" class="red_btn" title="Сбросить текущую таблицу">Сбросить</button>
+            </div>
+        </div>
+        <div>
+            <button id="minimizing_next" class="green_btn">Далее</button>
+        </div>
+    </div>
+
+    <div id="selection" class="column" style="display: none;">
+        <div>
+            Выберите выражения, которые будут использованы далее.
+        </div>
+        <div id="comparators" class="column"></div>
+        <div>
+            <button id="selection_next" class="green_btn">Далее</button>
+        </div>
+    </div>
+
+    <div id="editing" class="column" style="display: none;">
+        <div class="block column">
+            Выбранные выражения<br>
+            Вы можете изменить их, изменения будут подсвечиваться серым цветом.
+            <div id="editing_initial" style="display: block;"></div>
+            <div style="gap: 5px">
+                <button id="reset_edit" class="red_btn">Сбросить изменения</button>
+                <button id="apply_edit" class="green_btn">Применить изменения</button>
+            </div>
+        </div>
+        
+        <div class="block column">
+            <div id="k_values" style="display: block;"></div>
+        </div>
+        <div class="block column">
+            <div id="y_values" style="display: block;"></div>
+        </div>
+        <div>
+            <button id="editing_next" class="green_btn">Сформировать отчет</button>
+        </div>
+    </div>
+
+    <div id="results" class="column" style="display: none;">
+        <div id="results_content" class="column" style="display: block; user-select: auto;"></div>
+    </div>
+</body>
+
+<script src="state.js"></script>
+<script src="utilities.js"></script>
+<script src="input.js"></script>
+<script src="minimizing.js"></script>
+<script src="selection.js"></script>
+<script src="editing.js"></script>
+<script src="results.js"></script>
+
+<script>
+    AppStateMgr.go_to_state(AppState.Input);
+</script>
+
+</html>
