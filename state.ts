@@ -79,6 +79,7 @@ let state = {
     y_count : 2,
     input_values : [] as InputPair[],
     // Minimizing
+    minimizing_skip : false,
     minimizing : [] as Minimizing[],
     // Selection
     selection : [] as SelectedExpr[],

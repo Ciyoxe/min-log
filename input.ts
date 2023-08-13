@@ -62,6 +62,10 @@ AppStateMgr.on_state_enter(AppState.Input, ()=> {
         state.input_values = inputs;
         AppStateMgr.go_to_state(AppState.Minimizing);
     };
+    by_id("skip_minimizing").onclick = ()=> {
+        state.minimizing_skip = true;
+        AppStateMgr.go_to_state(AppState.Editing);
+    };
 });
 AppStateMgr.on_state_exit(AppState.Input, ()=> {
     by_id("input").style.display = "none";

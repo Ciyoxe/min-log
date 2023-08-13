@@ -11,6 +11,8 @@ let conjuction_as_string = (c: Conjunction)=> {
             str += `X${i + 1} `;
         }
     }
+    if (c.variables.bits_set_count() === 0)
+        str = "0";
     return str.trim();
 };
 

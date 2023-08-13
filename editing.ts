@@ -58,6 +58,7 @@ let parse_expr = (str: string)=> {
     let parts = str.substring(pos).split("+");
     let conjs = [] as Conjunction[];
 
+    if (parts.length !== 1 || parts[0] !== "0")
     for (let prt of parts) {
         if (prt.length === 0)
             return null;
@@ -107,9 +108,15 @@ AppStateMgr.on_state_enter(AppState.Editing, ()=> {
     let parsed_exprs  = [] as YExpression[];
 
     let reset = ()=> {
+        if (state.minimizing_skip) {
+            for (let i = 0; i < state.y_count; i++)
+                editing_talbe.children[i].textContent = `Y${i + 1} = 0`;
+            return;
+        }
+
         for (let i = 0; i < state.y_count; i++) {
             let init  = initial_exprs[i];
-            let child = editing_talbe.children[i] as HTMLElement; 
+            let child = editing_talbe.children[i] as HTMLElement;
             child.textContent = `
                 ${init.negative ? "!" : " "}Y${init.y_index + 1} = ${expr_as_string(init.expr)}
             `;
@@ -122,6 +129,20 @@ AppStateMgr.on_state_enter(AppState.Editing, ()=> {
 
     let update = ()=> {
         parsed_exprs = [];
+        
+        if (state.minimizing_skip) {
+            for (let index = 0; index < state.y_count; index++) {
+                let child       = editing_talbe.children[index];
+                let parsed_expr = parse_expr(child.textContent ?? "");
+                if (parsed_expr && parsed_expr.y_index === index) {
+                    child.className = "editing_input";
+                    parsed_exprs.push(parsed_expr);
+                }
+                else child.className = "editing_input wrong";
+            }
+            return;
+        }
+
         [...editing_talbe.children].forEach((child, index)=> {
             let parsed_expr = parse_expr(child.textContent ?? "");
             if (parsed_expr && parsed_expr.y_index === index) {
@@ -184,6 +205,8 @@ AppStateMgr.on_state_enter(AppState.Editing, ()=> {
         let y_html   = [] as string[];
         for (let y_value of y_values) {
             let k_html = [] as string[];
+            if (y_value.k_indices.length === 0)
+                k_html.push("0");
             for (let k_index of y_value.k_indices) {
                 k_html.push(`<mark style="background-color: ${k_values[k_index].color}">K${k_index + 1}</mark>`);
             }
@@ -194,6 +217,8 @@ AppStateMgr.on_state_enter(AppState.Editing, ()=> {
         [...editing_talbe.children].forEach((child, index)=> {
             let expr   = parsed_exprs[index];
             let r_html = [] as string[];
+            if (expr.expr.length === 0) 
+                r_html.push("0");
             for (let con of expr.expr) {
                 let k = k_values.find(x => equal_conjunctions(x.value, con))!;
                 r_html.push(`<mark style="background-color: ${k.color}">${conjuction_as_string(k.value)}</mark>`);

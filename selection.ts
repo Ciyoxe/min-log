@@ -2,8 +2,12 @@ let get_expr_complexity = (expr: Conjunction[])=>
     Math.max(expr.length - 1, 0) +
     expr.reduce((v, conjunction)=> v + Math.max(0, conjunction.variables.bits_set_count() * 2 - 1), 0);
 
-let expr_as_string = (expr: Conjunction[])=> 
-    expr.map(c => conjuction_as_string(c)).join(" + ");
+let expr_as_string = (expr: Conjunction[])=> {
+    if (expr.length > 0)
+        return expr.map(c => conjuction_as_string(c)).join(" + ");
+    else
+        return "0";
+}
 
 
 AppStateMgr.on_state_enter(AppState.Selection, () => {

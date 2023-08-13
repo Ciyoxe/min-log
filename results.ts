@@ -85,48 +85,50 @@ let make_images = (m: Minimizing)=> {
 
 
 AppStateMgr.on_state_enter(AppState.Results, ()=> {
-    // входные данные
-    let report = `
-    <table style="padding: 5px; border: 2px solid black; border-radius: 10px;">
-        <tr>
-            <th>Входные  сигналы X&nbsp;</th>
-            <th>&nbsp;Выходные сигналы Y</th>
-        </tr>
-    `;
-    for (let inp of state.input_values) {
+    let report = "";
+    if (!state.minimizing_skip) {
+        // входные данные
         report += `
-        <tr>
-            <td style="text-align: center">${inp.x.data.toString(16)}</td>
-            <td style="text-align: center">${inp.y.data.toString(16)}</td>
-        </tr>
+        <table style="padding: 5px; border: 2px solid black; border-radius: 10px;">
+            <tr>
+                <th>Входные  сигналы X&nbsp;</th>
+                <th>&nbsp;Выходные сигналы Y</th>
+            </tr>
         `;
-    }
-    report += "</table>";
-
-    // таблицы минимизации
-    for (let min of state.minimizing) {
-        report += `<div style="display: inline-block;">`;
-        report += `Минимизация <b>Y${min.y_index + 1}</b> по <b>${min.negative ? "нулям" : "единицам"}</b><br>`;
-        for (let image of make_images(min)) {
-            report += `<image src="${image}" ></image>`;
+        for (let inp of state.input_values) {
+            report += `
+            <tr>
+                <td style="text-align: center">${inp.x.data.toString(16)}</td>
+                <td style="text-align: center">${inp.y.data.toString(16)}</td>
+            </tr>
+            `;
         }
-        report += "</div>";
+        report += "</table>";
+
+        // таблицы минимизации
+        for (let min of state.minimizing) {
+            report += `<div style="display: inline-block;">`;
+            report += `Минимизация <b>Y${min.y_index + 1}</b> по <b>${min.negative ? "нулям" : "единицам"}</b><br>`;
+            for (let image of make_images(min)) {
+                report += `<image src="${image}" ></image>`;
+            }
+            report += "</div>";
+        }
+
+        report += "<br><b>Полученные выражения:</b><br>";
+        for (let expr of state.minimizing) {
+            report += `${expr.negative ? "!" : " "}Y${expr.y_index + 1} = ${expr_as_string(expr.choosing)}`;
+            report += `&nbsp;(Сложность - <b>${get_expr_complexity(expr.choosing)}</b>)<br>`;
+        }
+
+
+        report += "<br><b>Выбранные выражения:</b><br>";
+        for (let selection of state.selection) {
+            let expr = state.minimizing.find(x => x.negative === selection.negative && x.y_index === selection.y_index)!;
+            report += `${expr.negative ? "!" : " "}Y${expr.y_index + 1} = ${expr_as_string(expr.choosing)}`;
+            report += `&nbsp;(Сложность - <b>${get_expr_complexity(expr.choosing)}</b>)<br>`;
+        }
     }
-
-    report += "<br><b>Полученные выражения:</b><br>";
-    for (let expr of state.minimizing) {
-        report += `${expr.negative ? "!" : " "}Y${expr.y_index + 1} = ${expr_as_string(expr.choosing)}`;
-        report += `&nbsp;(Сложность - <b>${get_expr_complexity(expr.choosing)}</b>)<br>`;
-    }
-
-
-    report += "<br><b>Выбранные выражения:</b><br>";
-    for (let selection of state.selection) {
-        let expr = state.minimizing.find(x => x.negative === selection.negative && x.y_index === selection.y_index)!;
-        report += `${expr.negative ? "!" : " "}Y${expr.y_index + 1} = ${expr_as_string(expr.choosing)}`;
-        report += `&nbsp;(Сложность - <b>${get_expr_complexity(expr.choosing)}</b>)<br>`;
-    }
-
     report += "<br><b>Редактированные выражения:</b><br>";
     let sum_complex = 0;
     for (let expr of state.y_values) {
