@@ -61,7 +61,7 @@ input:hover {
     border-radius: 10px;
 }
 .wrong {
-    background-color: red !important;
+    background-color: rgb(223, 119, 119) !important;
 }
 .del_value {
     margin: 0;

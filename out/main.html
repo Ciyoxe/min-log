@@ -14,9 +14,6 @@
             <div style="align-items: center;">
                 <div style="min-width: 200px;">Количество выходов:</div> (1..8) &nbsp; <input id="y_count_input" type="number" value="2">
             </div>
-            <div>
-                <button id="skip_minimizing" class="yellow_btn" title="Перейти к ручному вводу уравнений без минимизации">Пропустить минимизацию</button>
-            </div>
         </div>
         <div class="block column">
             <div style="align-items: center;">
@@ -28,7 +25,10 @@
             <div id="input_table" class="column"></div>
             <p style="color: gray">Лайфхак: Используйте Tab для быстрого переключения между полями ввода.</p>
         </div>
-        <button id="input_next" class="green_btn">Далее</button>
+        <div>
+            <button id="skip_minimizing" class="yellow_btn" title="Перейти к ручному вводу уравнений без минимизации">Пропустить минимизацию</button>
+            <button id="input_next" class="green_btn">Далее</button>
+        </div>
     </div>
 
     <div id="minimizing" class="column" style="display: none;">
