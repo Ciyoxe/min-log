@@ -108,18 +108,12 @@ AppStateMgr.on_state_enter(AppState.Editing, ()=> {
     let parsed_exprs  = [] as YExpression[];
 
     let reset = ()=> {
-        if (state.minimizing_skip) {
-            for (let i = 0; i < state.y_count; i++)
-                editing_talbe.children[i].textContent = `Y${i + 1} = 0`;
-            return;
-        }
-
         for (let i = 0; i < state.y_count; i++) {
             let init  = initial_exprs[i];
             let child = editing_talbe.children[i] as HTMLElement;
-            child.textContent = `
-                ${init.negative ? "!" : " "}Y${init.y_index + 1} = ${expr_as_string(init.expr)}
-            `;
+            child.textContent = state.minimizing_skip ? 
+            `Y${i + 1} = 0` : 
+            `${init.negative ? "!" : " "}Y${init.y_index + 1} = ${expr_as_string(init.expr)}`;
             child.oninput = ()=> { 
                 was_changes = true;
                 need_apply  = true;
